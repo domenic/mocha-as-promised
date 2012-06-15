@@ -1,6 +1,5 @@
 "use strict"
 
-sinon = require("sinon")
 Q = require("q")
 Runnable = require("mocha").Runnable
 
