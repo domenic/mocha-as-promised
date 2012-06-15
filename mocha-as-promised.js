@@ -15,7 +15,7 @@ module.exports = function (mocha) {
     var OriginalRunnable = mocha.Runnable;
     mocha.Runnable = function (title, fn) {
         function newFn(done) {
-            // Run the original `fn`, assuming its asynchronous (no harm passing `done` if it's not).
+            // Run the original `fn`, assuming it's callback-asynchronous (no harm passing `done` if it's not).
             var retVal = fn(done);
 
             if (isPromise(retVal)) {
@@ -34,7 +34,7 @@ module.exports = function (mocha) {
                     }
                 );
             } else if (fn.length === 0) {
-                // If we weren't asynchronous, call `done()` now. If we were then `fn` will call it eventually.
+                // If we weren't callback-asynchronous, call `done()` now. If we were then `fn` will call it eventually.
                 done();
             }
         }
