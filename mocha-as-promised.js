@@ -1,7 +1,7 @@
 "use strict";
 
 function isPromise(x) {
-    return typeof x.then === "function";
+    return typeof x === "object" && typeof x.then === "function";
 }
 
 var duckPunchedAlready = false;
@@ -33,7 +33,7 @@ module.exports = function (mocha) {
                         done(reason);
                     }
                 );
-            } else if (originalThisFn.length === 0) {
+            } else if (fn.length === 0) {
                 // If we weren't asynchronous, call `done()` now. If we were then `fn` will call it eventually.
                 done();
             }

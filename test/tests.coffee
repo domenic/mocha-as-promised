@@ -57,3 +57,17 @@ describe "Modifications to mocha's `Runnable` constructor", ->
             @test.run (err) =>
                 err.should.equal(@err)
                 done()
+
+    describe "when doing normal synchronous tests", ->
+        beforeEach ->
+            @test = new Runnable("", =>)
+
+        it "should run normally", (done) ->
+            @test.run(done)
+
+    describe "when doing normal asynchronous tests", ->
+        beforeEach ->
+            @test = new Runnable("", (done) => process.nextTick => done())
+
+        it "should run normally", (done) ->
+            @test.run(done)
