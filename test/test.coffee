@@ -3,7 +3,7 @@
 Q = require("q")
 Test = require("mocha").Test
 
-describe "Mocha's `Test` class", ->
+describe "Mocha's `Test` class, after duck-punching", ->
     describe "when the function returns a promise fulfilled with no value", ->
         beforeEach ->
             @ran = false
