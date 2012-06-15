@@ -11,7 +11,7 @@ rejected = (err) =>
 # NOTE: due to an awesome "feature" of Mocha, if you set `this.runnable` in a `beforeEach` or other text context,
 # everything breaks. So we use `@test = new Runnable` instead of the more obvious `@runnable = new Runnable`.
 
-describe "Modifications to mocha's `Runnable.prototype.run` method", ->
+describe "Modifications to mocha's `Runnable` constructor", ->
     describe "when the function returns a promise fulfilled with no value", ->
         beforeEach ->
             @ran = false
