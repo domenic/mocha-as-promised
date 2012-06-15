@@ -12,11 +12,17 @@ module.exports = function (mocha) {
     }
     duckPunchedAlready = true;
 
-    var OriginalRunnable = mocha.Runnable;
-    mocha.Runnable = function (title, fn) {
+    // Sooooo, this is a huge hack. We want to intercept calls to `Runnable`, but we can't just replace it because it's
+    // a module export which other parts of Mocha use directly. Fortunately, they all use it in the same way:
+    // `Runnable.call(this, title, fn)`. Thus if we take control of the `.call` method (i.e. shadow the one inherited
+    // from `Function.prototype`), we have our interception hook.
+    var callOriginalRunnable = Function.prototype.call.bind(mocha.Runnable);
+
+    mocha.Runnable.call = function (thisP, title, fn) {
         function newFn(done) {
-            // Run the original `fn`, assuming it's callback-asynchronous (no harm passing `done` if it's not).
-            var retVal = fn(done);
+            // Run the original `fn`, passing along `done` for the case in which it's callback-asynchronous. Make sure
+            // to forward the `this` context, since you can set variables and stuff on it to share within a suite.
+            var retVal = fn.call(this, done);
 
             if (isPromise(retVal)) {
                 // If we get a promise back...
@@ -34,13 +40,14 @@ module.exports = function (mocha) {
                     }
                 );
             } else if (fn.length === 0) {
-                // If we weren't callback-asynchronous, call `done()` now. If we were then `fn` will call it eventually.
+                // If `fn` is synchronous (i.e. didn't have a `done` parameter and didn't return a promise), call `done`
+                // now. (If it's callback-asynchronous, `fn` will call `done` eventually since we passed it in above.)
                 done();
             }
         }
 
-        OriginalRunnable.call(this, title, newFn);
+        // Now that we have wrapped `fn` inside our promise-interpreting magic, call the original `mocha.Runnable`
+        // constructor but give it the magic `newFn` instead of the mundane `fn`.
+        callOriginalRunnable(thisP, title, newFn);
     };
-    mocha.Runnable.prototype = OriginalRunnable.prototype;
-    mocha.Runnable.prototype.constructor = mocha.Runnable;
 };
