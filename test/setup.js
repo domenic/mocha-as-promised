@@ -12,7 +12,7 @@ if (mochaPath !== desiredMochaPath) {
 var chai = require("chai");
 
 var mocha = require("mocha");
-var mochaAsPromised = require("../mocha-as-promised");
+var mochaAsPromised = require("..");
 
 chai.should();
 
