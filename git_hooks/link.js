@@ -5,10 +5,10 @@ var path = require("path");
  "prepare-commit-msg", "pre-rebase", "update"].forEach(function (hook) {
     var hookInSourceControl = path.resolve(__dirname, hook);
 
-    if (path.existsSync(hookInSourceControl)) {
+    if (fs.existsSync(hookInSourceControl)) {
         var hookInHiddenDirectory = path.resolve(__dirname, "..", ".git", "hooks", hook);
 
-        if (path.existsSync(hookInHiddenDirectory)) {
+        if (fs.existsSync(hookInHiddenDirectory)) {
             fs.unlinkSync(hookInHiddenDirectory);
         }
 
