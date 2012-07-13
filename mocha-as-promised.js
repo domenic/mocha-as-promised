@@ -97,8 +97,8 @@
                 configurable: true,
                 enumerable: true,
                 get: function () {
-                    // Use the same logic Mocha does, but regarding the wrapped function instead of the original.
-                    return this._wrappedFn && this._wrappedFn.length;
+                    // We've made every test async, so always return `true`.
+                    return true;
                 },
                 set: function () {
                     // Ignore Mocha trying to set this; it doesn't know the whole picture.
