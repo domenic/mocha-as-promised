@@ -72,6 +72,13 @@ describe "Mocha's `Test` class, after duck-punching", ->
                     err.should.equal(@err)
                     done()
 
+        describe "that return `null`", ->
+            beforeEach ->
+                @theTest = new Test("", => null)
+
+            it "should succeed normally", (done) ->
+                @theTest.run(done)
+
     describe "when doing normal asynchronous tests", ->
         describe "that succeed", ->
             beforeEach ->
