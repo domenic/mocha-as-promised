@@ -57,10 +57,7 @@ interfaces don't even get involved.
 Do an `npm install mocha-as-promised` to get up and running. Then:
 
 ```javascript
-var mocha = require("mocha");
-var mochaAsPromised = require("mocha-as-promised");
-
-mochaAsPromised(mocha);
+require("mocha-as-promised")();
 ```
 
 You can of course put this code in a common test fixture file; for an example, see

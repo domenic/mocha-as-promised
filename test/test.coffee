@@ -1,7 +1,11 @@
 "use strict"
 
+
+path = require("path")
 Q = require("q")
-Test = require("mocha").Test
+
+mochaPath = path.resolve(process.argv[1], "../..")
+Test = require(mochaPath).Test
 
 describe "Mocha's `Test` class, after duck-punching", ->
     describe "when the function returns a promise fulfilled with no value", ->
