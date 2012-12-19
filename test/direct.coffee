@@ -18,3 +18,19 @@ describe "Direct usage of promise-returning tests", =>
         Q.delay(5).then =>
             Q.delay(5).then =>
                 clearTimeout(timeout)
+
+describe "Use of promise-returning tests in conjunction with promise-returning hooks", =>
+    [calledBefore, calledBeforeEach] = [false, false]
+
+    before =>
+        Q.resolve().then =>
+            calledBefore = true
+
+    beforeEach =>
+        calledBefore.should.be.true
+
+        Q.resolve().then =>
+            calledBeforeEach = true
+
+    it "should run the beforeEach hook asynchronously", =>
+        calledBeforeEach.should.be.true
