@@ -1,7 +1,6 @@
 /node_modules/
 /npm-debug.log
 
-/git_hooks/
 /test/
 /.jshintrc
 /.npmignore
