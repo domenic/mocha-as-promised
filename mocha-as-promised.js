@@ -33,8 +33,8 @@
             return mochaAsPromised;
         });
     } else {
-        // Other environment (usually <script> tag): plug in global `mocha` directly and automatically.
-        mochaAsPromised(mocha);
+        // Other environment (usually <script> tag): plug in global `Mocha` directly and automatically.
+        mochaAsPromised(Mocha);
     }
 }((function () {
     "use strict";

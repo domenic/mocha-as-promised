@@ -19,6 +19,6 @@
 
     "globals": {
         "define": false,
-        "mocha": false
+        "Mocha": false
     }
 }
