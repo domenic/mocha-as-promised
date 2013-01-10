@@ -100,3 +100,11 @@ describe "Mocha's `Test` class, after duck-punching", ->
                 @theTest.run (err) =>
                     err.should.equal(@err)
                     done()
+
+    describe "when printing test details", ->
+        beforeEach ->
+            @theTest = new Test("", => return "hello")
+
+        it "should show the original code", ->
+          @theTest.fn.toString().should.match /return \"hello\"/
+

@@ -121,6 +121,9 @@
                             done();
                         }
                     };
+                    this._wrappedFn.toString = function() {
+                      return fn.toString();
+                    };
                 }
             },
             async: {
