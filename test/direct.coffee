@@ -34,3 +34,16 @@ describe "Use of promise-returning tests in conjunction with promise-returning h
 
     it "should run the beforeEach hook asynchronously", =>
         calledBeforeEach.should.be.true
+
+describe "Does not interfere with synchronous hooks", =>
+    [calledBefore, calledBeforeEach] = [false, false]
+
+    before =>
+        calledBefore = true
+
+    beforeEach =>
+        calledBefore.should.be.true
+        calledBeforeEach = true
+
+    it "should run the beforeEach hook synchronously", =>
+        calledBeforeEach.should.be.true
