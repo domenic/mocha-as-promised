@@ -130,8 +130,7 @@
                 configurable: true,
                 enumerable: true,
                 get: function () {
-                    // We've made every test async, so always return `true`.
-                    return true;
+                    return typeof this._wrappedFn === "function";
                 },
                 set: function () {
                     // Ignore Mocha trying to set this; it doesn't know the whole picture.
