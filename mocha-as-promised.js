@@ -121,8 +121,8 @@
                             done();
                         }
                     };
-                    this._wrappedFn.toString = function() {
-                      return fn.toString();
+                    this._wrappedFn.toString = function () {
+                        return fn.toString();
                     };
                 }
             },
