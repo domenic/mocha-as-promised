@@ -1,6 +1,7 @@
 {
     "name": "mocha-as-promised",
     "description": "Adds “thenable” promise support to the Mocha test runner.",
+    "keywords": ["promises", "promises-a-plus", "mocha", "testing"],
     "version": "1.2.1",
     "author": "Domenic Denicola <domenic@domenicdenicola.com> (http://domenicdenicola.com)",
     "license": "WTFPL",
