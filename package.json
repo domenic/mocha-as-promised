@@ -17,6 +17,9 @@
         "test-browser": "opener ./test/index.html",
         "lint": "jshint mocha-as-promised.js"
     },
+    "peerDependencies": {
+        "mocha": ">= 1.8.0 <2"
+    },
     "devDependencies": {
         "coffee-script": "~1.6",
         "chai": "~1.5",
