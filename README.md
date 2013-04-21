@@ -108,8 +108,8 @@ require("mocha-as-promised")(require("grunt-mocha-test/node_modules/mocha"));
 
 The essential strategy is to intercept any test functions that Mocha runs, and inspect their return values. If they
 return a promise, then translate fulfillment/rejection appropriately. It's explained in more detail how exactly this is
-done in a large comment block at the top of the source. You can also check out d98f2d95197896cd7b948b6208cb6c1235f43eed
-for an alternative approach at the interception, which was abandoned in favor of the current one.
+done in a large comment block at the top of the source. You can also check out [`d98f2d9`][] for an alternative
+approach at the interception, which was abandoned in favor of the current one.
 
 Note that Mocha as Promised *doesn't* just override `Runnable.prototype.run`, as is done by [my Mocha fork][mocha-fork].
 That seemed a bit too fragile to be a long-term solution. The interception approach involves more black magic, but
@@ -128,3 +128,4 @@ is probably more resilient in the face of upstream changes. At least, that's the
 [fixturedemo]: https://github.com/domenic/mocha-as-promised/tree/master/test/
 [grunt-mocha-test]: https://npmjs.org/package/grunt-mocha-test
 [amd]: https://github.com/amdjs/amdjs-api/wiki/AMD
+[`d98f2d9`]: https://github.com/domenic/mocha-as-promised/commit/d98f2d95197896cd7b948b6208cb6c1235f43eed
