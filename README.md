@@ -54,7 +54,7 @@ interfaces don't even get involved.
 
 ### Node
 
-Do an `npm install mocha-as-promised` to get up and running. Then:
+Do an `npm install mocha-as-promised --save-dev` to get up and running. Then:
 
 ```javascript
 require("mocha-as-promised")();
@@ -88,6 +88,20 @@ automatically plug in to Mocha and be ready for use:
 <script src="mocha-as-promised.js"></script>
 ```
 
+### Node, the Advanced Version
+
+The `require("mocha-as-promised")()` above tries to detect which instance of Mocha is being used automatically. This
+way, Mocha as Promised can plug into either the local Mocha instance installed into your project, or into the global
+Mocha instance if you're running your tests using the globally-installed command-line runner.
+
+In some cases, this can fall down, for example if you're using Mocha as part of a different system like a Grunt plugin.
+In these cases, you can pass the Mocha instance into the Mocha as Promised function. For example, if you were using
+the version of Mocha bundled with [grunt-mocha-test][], you would do
+
+```javascript
+require("mocha-as-promised")(require("grunt-mocha-test/node_modules/mocha"));
+```
+
 ## How Does This Work!?
 
 **Black magic**. No, seriously, this is a big hack.
@@ -112,4 +126,5 @@ is probably more resilient in the face of upstream changes. At least, that's the
 [Q]: https://github.com/kriskowal/q
 [Q.all]: https://github.com/kriskowal/q#combination
 [fixturedemo]: https://github.com/domenic/mocha-as-promised/tree/master/test/
+[grunt-mocha-test]: https://npmjs.org/package/grunt-mocha-test
 [amd]: https://github.com/amdjs/amdjs-api/wiki/AMD
