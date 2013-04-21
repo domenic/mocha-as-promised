@@ -8,9 +8,7 @@
         "type": "git",
         "url": "https://github.com/domenic/mocha-as-promised"
     },
-    "bugs": {
-        "url": "http://github.com/domenic/mocha-as-promised/issues"
-    },
+    "bugs": "http://github.com/domenic/mocha-as-promised/issues",
     "main": "mocha-as-promised.js",
     "scripts": {
         "test": "mocha",
