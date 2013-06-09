@@ -99,12 +99,12 @@ The `require("mocha-as-promised")()` above tries to detect which instance of Moc
 way, Mocha as Promised can plug into either the local Mocha instance installed into your project, or into the global
 Mocha instance if you're running your tests using the globally-installed command-line runner.
 
-In some cases, this can fall down, for example if you're using Mocha as part of a different system like a Grunt plugin.
-In these cases, you can pass the Mocha instance into the Mocha as Promised function. For example, if you were using
-the version of Mocha bundled with [grunt-mocha-test][], you would do
+In some cases, if you're doing something weird, this can fall down. In these cases, you can pass the Mocha instance into
+the Mocha as Promised function. For example, if you somehow had your Mocha module as a property of the `foo` module,
+instead of it being found in the usual npm directory structures, you would do
 
 ```javascript
-require("mocha-as-promised")(require("grunt-mocha-test/node_modules/mocha"));
+require("mocha-as-promised")(require("foo").MyMocha);
 ```
 
 ## How Does This Work!?
