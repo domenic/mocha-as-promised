@@ -60,8 +60,13 @@
 }((function () {
     "use strict";
 
-    function isPromise(x) {
-        return (typeof x === "object" || typeof x === "function") && x !== null && typeof x.then === "function";
+    function getThen(x) {
+        if ((typeof x === "object" || typeof x === "function") && x !== null) {
+            var then = x.then;
+            if (typeof then === "function") {
+                return then;
+            }
+        }
     }
 
     var duckPunchedAlready = false;
@@ -111,9 +116,11 @@
                         // within a suite.
                         var retVal = fn.call(this, done);
 
-                        if (isPromise(retVal)) {
+                        var then = getThen(retVal);
+                        if (then) {
                             // If we get a promise back...
-                            retVal.then(
+                            then.call(
+                                retVal,
                                 function () {
                                     // On fulfillment, ignore the fulfillment value and call `done()` with no arguments.
                                     done();
