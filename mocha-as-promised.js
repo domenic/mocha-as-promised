@@ -61,7 +61,7 @@
     "use strict";
 
     function isPromise(x) {
-        return typeof x === "object" && x !== null && typeof x.then === "function";
+        return (typeof x === "object" || typeof x === "function") && x !== null && typeof x.then === "function";
     }
 
     var duckPunchedAlready = false;
