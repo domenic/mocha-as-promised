@@ -33,6 +33,22 @@ describe "Mocha's `Test` class, after duck-punching", ->
                 @ran.should.be.true
                 done()
 
+    describe "when the function returns a promise that is also a function", ->
+        beforeEach ->
+            @ran = false
+            testFunc = =>
+                process.nextTick => @ran = true
+                functionPromise = () =>
+                realPromise = Q.resolve({})
+                functionPromise.then = realPromise.then.bind(realPromise)
+                return functionPromise
+            @theTest = new Test("", testFunc)
+
+        it "should invoke the done callback asynchronously with no argument", (done) ->
+            @theTest.run =>
+                @ran.should.be.true
+                done()
+
     describe "when the function returns a promise rejected with no reason", ->
         beforeEach ->
             # Q automatically gives `new Error()` if no rejection reason is supplied, i.e. it is impossible to create
