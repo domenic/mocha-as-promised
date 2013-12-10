@@ -1,18 +1,18 @@
 (function (mochaAsPromised) {
     "use strict";
 
-    function findNodeJSMocha(moduleToTest, suffix) {
+    function findNodeJSMocha(moduleToTest, suffix, acc) {
+        if (!acc) { acc = []; }
+
         if (moduleToTest.id.indexOf(suffix, moduleToTest.id.length - suffix.length) !== -1 && moduleToTest.exports) {
-            return moduleToTest.exports;
+            acc.push(moduleToTest.exports);
         }
 
         for (var i = 0; i < moduleToTest.children.length; ++i) {
-            var found = findNodeJSMocha(moduleToTest.children[i], suffix);
-
-            if (found) {
-                return found;
-            }
+            findNodeJSMocha(moduleToTest.children[i], suffix, acc);
         }
+
+        return acc;
     }
 
     // Module systems magic dance.
@@ -46,7 +46,11 @@
                 }
             }
 
-            mochaAsPromised(mocha);
+            if (!Array.isArray(mocha)) {
+                mocha = [mocha];
+            }
+
+            mocha.forEach(mochaAsPromised);
         };
     } else if (typeof define === "function" && define.amd) {
         // AMD
@@ -69,13 +73,11 @@
         }
     }
 
-    var duckPunchedAlready = false;
-
     return function mochaAsPromised(mocha) {
-        if (duckPunchedAlready) {
+        if (mocha._mochaAsPromisedLoadedAlready) {
             return;
         }
-        duckPunchedAlready = true;
+        mocha._mochaAsPromisedLoadedAlready = true;
 
         // Soooo this is an awesome hack.
 
