@@ -79,7 +79,7 @@ define(function (require, exports, module) {
     var mocha = require("mocha");
     var mochaAsPromised = require("mocha-as-promised");
 
-    mochaAsPromised(mocha);
+    mochaAsPromised([mocha]);
 });
 ```
 
