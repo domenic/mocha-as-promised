@@ -120,6 +120,10 @@ Note that Mocha as Promised *doesn't* just override `Runnable.prototype.run`, as
 That seemed a bit too fragile to be a long-term solution. The interception approach involves more black magic, but
 is probably more resilient in the face of upstream changes. At least, that's the hope.
 
+## Moch as Generated
+
+Want to use generators inside your Mocha tests? Check out the [Mocha as Generated][mocha-as-generated] fork that allows
+that.
 
 [Mocha]: http://visionmedia.github.com/mocha/
 [promises]: http://www.slideshare.net/domenicdenicola/callbacks-promises-and-coroutines-oh-my-the-evolution-of-asynchronicity-in-javascript
@@ -134,3 +138,4 @@ is probably more resilient in the face of upstream changes. At least, that's the
 [grunt-mocha-test]: https://npmjs.org/package/grunt-mocha-test
 [amd]: https://github.com/amdjs/amdjs-api/wiki/AMD
 [`d98f2d9`]: https://github.com/domenic/mocha-as-promised/commit/d98f2d95197896cd7b948b6208cb6c1235f43eed
+[mocha-as-generated]: https://github.com/dariusriggins/mocha-as-generated
