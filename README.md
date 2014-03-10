@@ -120,7 +120,7 @@ Note that Mocha as Promised *doesn't* just override `Runnable.prototype.run`, as
 That seemed a bit too fragile to be a long-term solution. The interception approach involves more black magic, but
 is probably more resilient in the face of upstream changes. At least, that's the hope.
 
-## Moch as Generated
+## Mocha as Generated
 
 Want to use generators inside your Mocha tests? Check out the [Mocha as Generated][mocha-as-generated] fork that allows
 that.
